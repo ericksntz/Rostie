@@ -1,5 +1,5 @@
 import express from "express"
-import { getUsuarios, postUsuarios, putUsuarios, deleteUsuarios } from "./controladores/usuarioController.js";
+import { getUsuarios, postUsuarios, putUsuarios, deleteUsuarios } from "./controllers/usuarioController.js";
 
 const roteador = express.Router();
 
