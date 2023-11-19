@@ -1,16 +1,12 @@
-import express from "express"
-import { getUsuarios, postUsuarios, postLoginUsuario,putUsuarios, deleteUsuarios } from "./controllers/usuarioController.js";
+import express from "express";
+import { getUsuarios, postUsuarios, postLoginUsuario, putUsuarios, deleteUsuarios } from "./controllers/usuarioController.js";
 
-const roteador = express.Router();
+const rotasUsuario = express.Router();
 
-roteador.get("/", getUsuarios)
+rotasUsuario.get("/", getUsuarios);
+rotasUsuario.post("/", postUsuarios);
+rotasUsuario.post("/login", postLoginUsuario);
+rotasUsuario.put("/:id", putUsuarios);
+rotasUsuario.delete("/:id", deleteUsuarios);
 
-roteador.post("/", postUsuarios)
-
-roteador.post("/", postLoginUsuario)
-
-roteador.put("/:id", putUsuarios)
-
-roteador.delete("/:id", deleteUsuarios)
-
-export default roteador;
+export default rotasUsuario;

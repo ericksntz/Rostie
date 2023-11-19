@@ -10,8 +10,8 @@ export const getItens = (req, res) => {
     })
 }
 
-export const postUsuarios = (req, res) => {
-    const q = "INSERT INTO user(`nome`, `email`, `senha`) VALUES(?)";
+export const postItens = (req, res) => {
+    const q = "INSERT INTO item(`nome`, `qntd`, `categoria`, `vencimento`, `image`) VALUES(?)";
 
     const values = [
         req.body.nome,
@@ -28,8 +28,8 @@ export const postUsuarios = (req, res) => {
     })
 }
 
-export const putUsuarios = (req, res) => {
-    const q = "UPDATE user SET `nome` = ?, `qntd` = ?, `categoria` = ?, , `vencimento` = ?, `image` = ? WHERE `id` = ?";
+export const putItens = (req, res) => {
+    const q = "UPDATE item SET `nome` = ?, `qntd` = ?, `categoria` = ?, , `vencimento` = ?, `image` = ? WHERE `id` = ?";
 
     const values = [
         req.body.nome,
@@ -42,16 +42,16 @@ export const putUsuarios = (req, res) => {
     db.query(q, [...values, req.params.id], (error) =>{
         if(error) return res.json(error);
 
-        return res.status(200).json("Usuário alterado com sucesso!");
+        return res.status(200).json("Item alterado com sucesso!");
     })
 }
 
-export const deleteUsuarios = (req, res) => {
-    const q = "DELETE FROM user WHERE `id` = ?";
+export const deleteItens = (req, res) => {
+    const q = "DELETE FROM item WHERE `id` = ?";
 
     db.query(q, [req.params.id], (error) =>{
         if(error) return res.json(error);
 
-        return res.status(200).json("Usuário deletado com sucesso!");
+        return res.status(200).json("Item deletado com sucesso!");
     })
 }

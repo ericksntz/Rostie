@@ -5,7 +5,7 @@
   font-family: 'Inter', sans-serif;
 }
 
-body { 
+body {
   margin: 0;
   padding: 0;
 }
@@ -36,14 +36,13 @@ header {
 }
 
 .menu li {
-  display: inline; /* Exibir os itens do menu na mesma linha */
-  margin-right: 10px; /* Espaçamento entre os itens do menu */
+  display: inline; /* Exibir os itens do menu na mesma linha */ /* Espaçamento entre os itens do menu */
 }
 
 .menu a {
   color: #303030; /* Cor do texto dos links do menu */
   text-decoration: none; /* Remover sublinhado dos links do menu */
-  margin: 32px;
+  margin: 24px;
 }
 
 .menu a:hover {
@@ -64,6 +63,7 @@ header {
 .cadastre-se:hover {
   background-color: #151515;
 }
+
 
 .container {
   display: flex;

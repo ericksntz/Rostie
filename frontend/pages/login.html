@@ -11,7 +11,7 @@
     <div class="conteiner">
         <div class="left-side">
             <a href="home.html"><img src="../images/logo.png" alt="Logo" class="logo"></a>
-            <img src="../images/Chef-cuate.svg" alt="Foto Ilustrativa de Chefe Cozinhando" class="vetor">
+            <img src="../images/female chef-amico.svg" alt="Foto Ilustrativa de Chefe Cozinhando" class="vetor">
         </div>
         <div class="right-side">
             <div class="right-top">
@@ -19,83 +19,69 @@
             </div>
             <h1>Bem vindo de volta</h1>
             <h3>Faça seu login:</h3>
-            <form action="#" method="POST">
-                <label for="email">E-mail:</label>
-                <input type="email" placeholder="Digite seu e-mail" id="email" name="email" required>
+            <form method="POST">
+                <label for="email" class="form-label">E-mail:</label>
+                <input type="email" placeholder="Digite seu e-mail" id="email" name="email" class="form-control" required>
+                <div class="invalid-feedback">
+                    Email inválido!!
+                </div>
     
-                <label for="senha">Digite sua Senha:</label>
-                <input type="password" placeholder="Digite sua senha" id="senha" name="senha" required>
+                <label for="senha" class="form-label">Digite sua Senha:</label>
+                <input type="password" class="form-control" placeholder="Digite sua senha" id="senha" name="senha" required>
+                <div class="invalid-feedback">
+                    A senha é inválida!!
+                </div>
 
-                <a class="esqueci-senha" href="">Esqueceu a senha?</a>
+                <a class="esqueci-senha" href="#">Esqueceu a senha?</a>
     
+                <div id="email-tag" class="feedback-box">
+                    <p class="feedback-text">Dados Inválidos - Não há uma conta cadastrada com estes dados</p>
+                </div>
+
+                <div id="erro-interno" class="feedback-box">
+                    <p class="feedback-text">Error!! Verifique os dados!</p>
+                </div>
+
                 <button type="submit" value="cadastrar"> ENTRAR</button>
             </form>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
-        
-
-        senhaInput.addEventListener("keyup", () => {
-
-        const senha = senhaInput.value.trim(); // Remova espaços em branco no início e no final
-        const isValid = senha.length >= 8 && senha.length <= 20 && /[0-9]/.test(senha) && /[a-z]/.test(senha) && /[A-Z]/.test(senha) && /^[a-zA-Z0-9]+$/.test(senha);
-        
-        if(isValid){
-            senhaInput.classList.remove("is-invalid")
-            senhaInput.classList.add("is-valid")
-        }else{
-            console.log(valido)
-            senhaInput.classList.remove("is-valid")
-            senhaInput.classList.add("is-invalid")
-        }
-    });
-
-    confirmaSenha.addEventListener("keyup", () => {
-        const confirmaSenhaValue = confirmaSenha.value.trim();
-        if (confirmaSenhaValue === senhaInput.value) {
-            confirmaSenha.classList.remove("is-invalid");
-            confirmaSenha.classList.add("is-valid");
-        } else {
-            confirmaSenha.classList.remove("is-valid");
-            confirmaSenha.classList.add("is-invalid");
-        }
-    });
-
-
         var form = document.querySelector('form');
 
         form.addEventListener('submit', (event) => {
             if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-                form.classList.remove('was-validated')
-            }
-
-            form.classList.add('was-validated')
-        })
-        
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            if (form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            } else {
                 let dados = {
-                    nome: document.querySelector("#nome").value.trim(),
                     email: document.querySelector("#email").value,
-                    senha: senhaInput.value
-                }
-                console.log(dados);
-                fetch("http://localhost:5752/user/", {
+                    senha: document.querySelector("#senha").value
+                };
+                
+                fetch("http://localhost:5752/user/login", {
                     method: "POST",
                     body: JSON.stringify(dados),
-                    headers:{
+                    headers: {
                         "Content-Type": "application/json"
                     }
-                })
-                .then(resposta => resposta.json())
-                .then(resultado => window.location.href = "login.html")
-
+                }).then(resposta => resposta.json())
+                .then(resultado => {
+                    console.log(resultado); // Verifique a resposta do servidor
+                    
+                    if(resultado) {
+                        window.location.href = "home.html"; // Redireciona para a página home se o login for bem-sucedido
+                    } else {
+                        document.querySelector("#email-tag").style.display = "block"; // Exibe a mensagem de erro de login
+                    }
+                }).catch(error => {
+                    console.error("Erro:", error); // Trata qualquer erro que ocorra na requisição
+                    document.querySelector("#erro-interno").style.display = "block";
+                });
             }
-        })
+            form.classList.add('was-validated');
+        });
     </script>
 </body>
 </html>
