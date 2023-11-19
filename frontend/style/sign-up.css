@@ -135,3 +135,11 @@ h3 {
     text-decoration: none;
     font-weight: bold;
 }
+
+#aceitar-termos{
+    padding: 0;
+}
+
+.ultimaVerificacao{
+    margin-bottom: 10px;
+}

@@ -4,64 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/sign-up.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Rostie - Cadastro</title>
 </head>
 <body>
     <div class="conteiner">
         <div class="left-side">
-            <a href="/Página Inicial/index.html"><img src="../images/logo.png" alt="Logo" class="logo"></a>
+            <a href="home.html"><img src="../images/logo.png" alt="Logo" class="logo"></a>
             <img src="../images/female chef-cuate.svg" alt="Foto Ilustrativa de Chefe Cozinhando" class="vetor">
         </div>
         <div class="right-side">
             <div class="right-top">
-            Já tem uma conta? <a href="/Login/index.html" class="btn-login">Fazer Login</a>
+            Já tem uma conta? <a href="login.html" class="btn-login">Fazer Login</a>
             </div>
             <h1>Bem vindo ao <span>Rostie</span></h1>
             <h3>Realize seu Cadastro:</h3>
-            <form action="#" method="POST">
-                <label for="nome">Nome:</label>
-                <input type="text" placeholder="Digite seu nome" id="nome" name="nome" required>
-    
-                <label for="email">E-mail:</label>
-                <input type="email" placeholder="Digite seu e-mail" id="email" name="email" required>
-    
-                <label for="senha">Digite sua Senha:</label>
-                <input type="password" placeholder="Digite sua senha" id="senha" name="senha" required>
+            <form class="needs-validation" novalidate>
 
-                <label for="senha">Confirme sua Senha:</label>
-                <input type="password" placeholder="Confirme sua senha" id="confirmasenha" name="confirmasenha" required>
-    
-                <label for="aceitar-termos">
-                    <input type="checkbox" id="aceitar-termos" name="aceitar-termos" required>
-                    Eu li e concordo com os <a href="" class="link">Termos e Condições</a> do site.
-                </label>
-    
+                <div class="mb-3" style="display: flex; flex-direction: column;">
+                    <label for="nome" class="form-label">Nome:</label>
+                    <input type="text" class="form-control" placeholder="Digite seu nome" id="nome" name="nome" required>
+                    <div class="invalid-feedback">
+                        Nome inválido!!
+                    </div>
+                </div>
+
+                <div class="mb-3" style="display: flex; flex-direction: column;">
+                    <label for="email" class="form-label">E-mail:</label>
+                    <input type="email" class="form-control" placeholder="Digite seu e-mail" id="email" name="email" required>
+                    <div class="invalid-feedback">
+                        Email inválido!!
+                    </div>
+                </div>    
+                
+                <div class="mb-3" style="display: flex; flex-direction: column;">
+                    <label for="senha" class="form-label" >Digite sua Senha:</label>
+                    <input type="password" class="form-control" placeholder="Digite sua senha" id="senha" name="senha" required>
+                    <div class="invalid-feedback">
+                        A senha é inválida!!
+                    </div>
+                </div>
+
+                <div class="mb-3" style="display: flex; flex-direction: column;">
+                    <label for="senha" class="form-label" >Confirme sua Senha:</label>
+                    <input type="password" class="form-control" placeholder="Confirme sua senha" id="confirmaSenha" name="confirmasenha" required>
+                    <div class="invalid-feedback">
+                        As senhas não são idênticas!!
+                    </div>
+                </div>
+
+                <div class="ultimaVerificacao">
+                    <input type="checkbox" class="form-check-input" id="aceitar-termos" name="aceitar-termos" required>
+                    <label for="aceitar-termos">Eu li e concordo com os <a href="" class="link">Termos e Condições</a> do site.</label>
+                    <div class="invalid-feedback">
+                        Você tem que aceitar os termos!!
+                    </div>
+                    
+                </div>
                 <button type="submit" value="cadastrar"> ENTRAR</button>
             </form>
         </div>
     </div>
-    <script>
-        const form = document.querySelector("form")
-        form.addEventListener("submit", function(e) {
-            e.preventDefault();
-
-            let dados = {
-                nome: nome.value,
-                email: email.value,
-                senha: senha.value,
-            }
-
-            fetch("http://localhost:5752/user", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(dados)
-            })
-            .then(resp => resp.json())
-            .then(resp => window.location.href = "sign-up.html")
-            .catch(error => console.error('Erro na requisição:', error));
-        })
-    </script>
 </body>
 </html>

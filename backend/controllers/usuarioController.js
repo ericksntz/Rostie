@@ -26,6 +26,28 @@ export const postUsuarios = (req, res) => {
     })
 }
 
+export const postLoginUsuario = (req, res) => {
+    const q = "SELECT email, senha FROM user WHERE email = ? AND senha = ?";
+
+    const values = [
+        req.body.nome,
+        req.body.email,
+        req.body.senha
+    ]
+
+    db.query(q, [...values], (error, data) =>{
+        if(error) return res.json(error);
+        else{
+            if(data.length != 0){
+                return res.status(200).json(true);
+            }
+            else{
+                return res.status(200).json(false);
+            }
+        }
+    })
+}
+
 export const putUsuarios = (req, res) => {
     const q = "UPDATE user SET `nome` = ?, `email` = ? WHERE `id` = ?";
 

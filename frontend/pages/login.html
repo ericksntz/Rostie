@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/login.css">
     <title>Rostie - Login</title>
 </head>
 <body>
     <div class="conteiner">
         <div class="left-side">
-            <a href="/Página Inicial/index.html"><img src="../images/logo.png" alt="Logo" class="logo"></a>
+            <a href="home.html"><img src="../images/logo.png" alt="Logo" class="logo"></a>
             <img src="../images/Chef-cuate.svg" alt="Foto Ilustrativa de Chefe Cozinhando" class="vetor">
         </div>
         <div class="right-side">
             <div class="right-top">
-            Não tem uma conta?<a href="/Cadastro/index.html" class="btn-login">Cadastre-se</a>
+            Não tem uma conta?<a href="sign-up.html" class="btn-login">Cadastre-se</a>
             </div>
             <h1>Bem vindo de volta</h1>
             <h3>Faça seu login:</h3>
@@ -31,26 +32,69 @@
             </form>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
-        const form = document.querySelector("form")
-        form.addEventListener("submit", function(e) {
-            e.preventDefault();
+        
 
-            let dados = {
-                email: email.value,
-                senha: senha.value,
+        senhaInput.addEventListener("keyup", () => {
+
+        const senha = senhaInput.value.trim(); // Remova espaços em branco no início e no final
+        const isValid = senha.length >= 8 && senha.length <= 20 && /[0-9]/.test(senha) && /[a-z]/.test(senha) && /[A-Z]/.test(senha) && /^[a-zA-Z0-9]+$/.test(senha);
+        
+        if(isValid){
+            senhaInput.classList.remove("is-invalid")
+            senhaInput.classList.add("is-valid")
+        }else{
+            console.log(valido)
+            senhaInput.classList.remove("is-valid")
+            senhaInput.classList.add("is-invalid")
+        }
+    });
+
+    confirmaSenha.addEventListener("keyup", () => {
+        const confirmaSenhaValue = confirmaSenha.value.trim();
+        if (confirmaSenhaValue === senhaInput.value) {
+            confirmaSenha.classList.remove("is-invalid");
+            confirmaSenha.classList.add("is-valid");
+        } else {
+            confirmaSenha.classList.remove("is-valid");
+            confirmaSenha.classList.add("is-invalid");
+        }
+    });
+
+
+        var form = document.querySelector('form');
+
+        form.addEventListener('submit', (event) => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                form.classList.remove('was-validated')
             }
 
-            fetch("http://localhost:5752/user/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(dados)
-            })
-            .then(resp => resp.json())
-            .then(resp => window.location.href = "home.html")
-            .catch(error => console.error('Erro na requisição:', error));
+            form.classList.add('was-validated')
+        })
+        
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (form.checkValidity()) {
+                let dados = {
+                    nome: document.querySelector("#nome").value.trim(),
+                    email: document.querySelector("#email").value,
+                    senha: senhaInput.value
+                }
+                console.log(dados);
+                fetch("http://localhost:5752/user/", {
+                    method: "POST",
+                    body: JSON.stringify(dados),
+                    headers:{
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then(resposta => resposta.json())
+                .then(resultado => window.location.href = "login.html")
+
+            }
         })
     </script>
 </body>
