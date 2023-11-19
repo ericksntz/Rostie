@@ -18,7 +18,7 @@
             </div>
             <h1>Bem vindo de volta</h1>
             <h3>Faça seu login:</h3>
-            <form action="#" method="post">
+            <form action="#" method="POST">
                 <label for="email">E-mail:</label>
                 <input type="email" placeholder="Digite seu e-mail" id="email" name="email" required>
     
@@ -31,5 +31,27 @@
             </form>
         </div>
     </div>
+    <script>
+        const form = document.querySelector("form")
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let dados = {
+                email: email.value,
+                senha: senha.value,
+            }
+
+            fetch("http://localhost:5752/user/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dados)
+            })
+            .then(resp => resp.json())
+            .then(resp => window.location.href = "home.html")
+            .catch(error => console.error('Erro na requisição:', error));
+        })
+    </script>
 </body>
 </html>
