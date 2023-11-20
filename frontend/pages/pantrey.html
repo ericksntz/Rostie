@@ -15,11 +15,11 @@
                 <a href="home.html"><img src="../images/logo-menro.png" alt=""></a>
             </div>
             <ul class="menu">
-                <li><a href="/home.html">Página Inicial</a></li>
-                <li><a href="/pantrey.html">Minha Despensa</a></li>
-                <li><a href="/recipes.html">Receitas</a></li>
-                <li><a href="/login.html">Login</a></li>
-                <li><a href="/sign-up.html" class="cadastre-se">Cadastrar-se</a></li>
+                <li><a href="./home.html">Página Inicial</a></li>
+                <li><a href="./pantrey.html">Minha Despensa</a></li>
+                <li><a href="./recipes.html">Receitas</a></li>
+                <li><a href="./login.html">Login</a></li>
+                <li><a href="./sign-up.html" class="cadastre-se">Cadastrar-se</a></li>
             </ul>
         </nav>
     </header>
@@ -27,16 +27,20 @@
     <div class="add-item">
         <div class="add-content">
             <h2>Adicione seus ingredientes: </h2>
-            <form action="#" method="POST">
-                <label for="ingredientes">Digite o Ingrediente:</label>
-                <input type="search" name="ingredientes" id="ingredientes" placeholder="Adicionar ou Remover Ingredientes">
-                    <label for="categorias">Selecione a Categoria:</label>
-                    <select name="categorias" id="categorias">
-                    
+            <form method="POST">
+                <div>
+                    <label for="ingredientes">Digite o Ingrediente:</label>
+                    <input type="search" name="ingredientes" id="ingredientes" placeholder="Adicionar ou Remover Ingredientes" required>
+
+                    <label for="qtd">Quantidade:</label>
+                    <input type="number" name="quantidade" id="qtd" value="1" min="0" oninput="validarNumero(this)" required>
+
+                </div>
+                <label for="categorias">Selecione a Categoria:</label>
+                    <select name="categorias" id="categorias" required>
+                        
                     </select>
-                <label for="qtd">Quantidade:</label>
-                <input type="number" name="quantidade" id="qtd" value="0">
-                <p>Ingrediente(s) selecionado(s):</p>
+                
                 <button class="btn" type="submit">Adicionar</button>
             </form>        
         </div>
@@ -44,87 +48,21 @@
 
     <div class="filter">
         <div class="filter-content">
-        <h2>Minha Despensa</h2>
-        <input type="search" name="pesquisaItem" id="pesquisaItem" placeholder="Pesquisar Ingrediente">
-        <div class="filters-right">
-            <p>Ordenar por: </p>
-        <select name="categorias2" id="categorias2">
-            <option value="Verduras e Legumes">Verduras e Legumes</option>
-            <option value="Grãos e Cereais">Grãos e Cereais</option>
-            <option value="Temperos e Ervas">Temperos e Ervas</option>
-            <option value="Proteínas">Proteínas</option>
-            <option value="Massas">Massas</option>
-            <option value="Lacteos">Laticínios</option>
-            <option value="Frutas">Frutas</option>
-            <option value="Gorduras e Óleos">Gorduras e Óleos</option>
-            <option value="Nozes e Sementes">Nozes e Sementes</option>
-            <option value="Outros">Outros</option>
-        </select>
-        <select name="ordemIngredientes" id="filtro-ordem">
-            <option value="">Mais Recentes</option>
-            <option value="">Mais Antigos</option>
-        </select>
-        </div>
+            <h2>Minha Despensa</h2>
+            <input type="search" name="pesquisaItem" id="pesquisaItem" placeholder="Pesquisar Ingrediente" required>
+            <div class="filters-right">
+                <p>Ordenar por: </p>
+                <select name="categorias2" id="categorias2">
+                </select>
+                <select name="ordemIngredientes" id="filtro-ordem">
+                    <option value="">Mais Recentes</option>
+                    <option value="">Mais Antigos</option>
+                </select>
+            </div>
         </div>
     </div>
-    <div class="grid-container">
-        <div class="grid-item">
-            <h3>Morango</h3>
-            <img class="foto-receita" src="../images/morango.jpg" alt="Imagem 1">
-            <h4>Frutas</h4>
-            <h5>Quantidade: 12</h5>
-            <button class="add-btn">+</button><button class="rmv-btn">-</button>
-        </div>
-        <div class="grid-item">
-            <h3>Melancia</h3>
-            <img class="foto-receita" src="../images/melancia.jpg" alt="Imagem 1">
-            <h4>Frutas</h4>
-            <h5>Quantidade: 01</h5>
-            <button class="add-btn">+</button><button class="rmv-btn">-</button>
-        </div>
-        <div class="grid-item">
-            <h3>Limão</h3>
-            <img class="foto-receita" src="../images/limão.jpg" alt="Imagem 1">
-            <h4>Frutas</h4>
-            <h5>Quantidade: 14</h5>
-            <button class="add-btn">+</button><button class="rmv-btn">-</button>
-        </div>
-        <div class="grid-item">
-            <h3>Mamão</h3>
-            <img class="foto-receita" src="../images/mamão.jpg" alt="Imagem 1">
-            <h4>Frutas</h4>
-            <h5>Quantidade: 02</h5>
-            <button class="add-btn">+</button><button class="rmv-btn">-</button>
-        </div>
-        <div class="grid-item">
-            <h3>Frango</h3>
-            <img class="foto-receita" src="../images/frango.jpg" alt="Imagem 1">
-            <h4>Proteínas</h4>
-            <h5>Quantidade: 01</h5>
-            <button class="add-btn">+</button><button class="rmv-btn">-</button>
-        </div>
-        <div class="grid-item">
-            <h3>Ovo</h3>
-            <img class="foto-receita" src="../images/ovo.jpg" alt="Imagem 1">
-            <h4>Proteínas</h4>
-            <h5>Quantidade: 24</h5>
-            <button class="add-btn">+</button><button class="rmv-btn">-</button>
-        </div>
-        <div class="grid-item">
-            <h3>Leite</h3>
-            <img class="foto-receita" src="../images/leite.jpg" alt="Imagem 1">
-            <h4>Laticínios</h4>
-            <h5>Quantidade: 06</h5>
-            <button class="add-btn">+</button><button class="rmv-btn">-</button>
-        </div>
-        <div class="grid-item">
-            <h3>Manteiga</h3>
-            <img class="foto-receita" src="../images/manteiga.jpg" alt="Imagem 1">
-            <h4>Latícinios</h4>
-            <h5>Quantidade: 02</h5>
-            <button class="add-btn">+</button><button class="rmv-btn">-</button>
-        </div>
-    </div>
+    
+    <div class="grid-container" id="itens">
     </div>
 
     <div class="footer">
@@ -147,28 +85,161 @@
         </ul>
       </div>
       </form>
-      <script>
-        const form = document.querySelector("form")
-        form.addEventListener("submit", function(e) {
-            e.preventDefault();
-
-            let dados = {
-                nome: nome.value,
-                categoria: email.value,
-                senha: senha.value,
+      <script> 
+        alert("Interaja com a página somente se estiver logado!!");
+        
+        function validarNumero(input) {
+            if (input.value < 1) {
+                input.setCustomValidity('Insira pelo menos uma unidade/porção.');
+            } else {
+                input.setCustomValidity('');
             }
+        }
 
-            fetch("http://localhost:5752/user", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(dados)
-            })
-            .then(resp => resp.json())
-            .then(resp => window.location.href = "sign-up.html")
-            .catch(error => console.error('Erro na requisição:', error));
+
+        fetch("http://localhost:5752/categoria", {
+            method: "GET"
         })
+        .then(resposta => resposta.json())
+        .then(data => {
+            preencherSelect("categorias", data); 
+            preencherSelect("categorias2", data);
+        })
+        .catch(error => console.error('Erro na requisição:', error));
+
+        function preencherSelect(id, data){
+            let select = document.querySelector("#" + id);
+            select.innerHTML  = "";
+
+            data.forEach(item => {
+                const opt = document.createElement("option");
+                opt.value = item.id;
+                opt.textContent = item.nome;
+                select.appendChild(opt);
+            });
+        }
+
+        function adicionarEventosBotoes() {
+            const btIncrement = document.querySelectorAll(".add-btn")
+            btIncrement.forEach(element => {
+                element.addEventListener('click', () => {
+                    let dados = { id: element.id, qntd: element.name };
+                    fetch("http://localhost:5752/item/incremento", {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(dados)
+                    })
+                    .then(resp => resp.json())
+                    .then(resultado => {alert(resultado); location.reload();})
+                    .catch(error => console.error('Erro:', error));
+                });
+            });
+
+            const btDecrement = document.querySelectorAll(".rmv-btn")
+            btDecrement.forEach(element => {
+                element.addEventListener('click', () => {
+                    let dados = { id: element.id, qntd: element.name };
+                    fetch("http://localhost:5752/item/decremento", {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(dados)
+                    })
+                    .then(resp => resp.json())
+                    .then(resultado => {alert(resultado); location.reload();})
+                    .catch(error => console.error('Erro:', error));
+                });
+            });
+        }
+
+        fetch("http://localhost:5752/item", {
+            method: "GET"
+        })
+        .then(resposta => resposta.json())
+        .then(data => {
+            adicionarGridItem(data);
+            adicionarEventosBotoes(); // Adiciona os Event Listeners após a criação dos botões
+        })
+        .catch(error => console.error('Erro na requisição:', error));
+
+
+        function adicionarGridItem(data) {
+            console.log(data);
+            let container = document.querySelector("#itens");
+            console.log(data);
+            console.log(container)
+            
+            data.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('grid-item');
+
+                const h3 = document.createElement('h3');
+                h3.textContent = item.nome;
+
+                const img = document.createElement('img');
+                img.classList.add('foto-receita');
+                img.src = `../images/${item.nome.replace(/\s+/g, '-').toLowerCase()}.png`;
+
+                const h4 = document.createElement('h4');
+                h4.textContent = item.categoria;
+
+                const h5 = document.createElement('h5');
+                h5.textContent = `Quantidade: ${item.qntd}`;
+
+                const addButton = document.createElement('button');
+                addButton.classList.add('add-btn');
+                addButton.id = item.id;
+                addButton.name = item.qntd;
+                addButton.textContent = '+';
+
+                const removeButton = document.createElement('button');
+                removeButton.classList.add('rmv-btn');
+                removeButton.id = item.id;
+                removeButton.name = item.qntd;
+                removeButton.textContent = '-';
+
+                div.appendChild(h3);
+                div.appendChild(img);
+                div.appendChild(h4);
+                div.appendChild(h5);
+                div.appendChild(addButton);
+                div.appendChild(removeButton);
+
+                container.appendChild(div); // Adiciona o elemento ao container
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+
+                let dados = {
+                    nome: document.querySelector("#ingredientes").value,
+                    qntd: document.querySelector("#qtd").value,
+                    idCategoria: document.querySelector("#categorias").value
+                };
+
+                console.log(document.querySelector("#categorias").value);
+                
+                fetch("http://localhost:5752/item", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(dados)
+                })
+                .then(resp => resp.json())
+                .then(resultado => {
+                    form.reset();
+                    alert(resultado);
+                })
+
+            });
+        });
     </script>
 </body>
 </html>

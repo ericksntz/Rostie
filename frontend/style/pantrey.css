@@ -5,6 +5,11 @@
   font-family: 'Inter', sans-serif;
 }
 
+form{
+  display: flex;
+  flex-direction: column;
+}
+
 body { 
   margin: 0;
   padding: 0;

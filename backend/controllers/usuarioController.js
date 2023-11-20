@@ -28,7 +28,8 @@ export const postUsuarios = (req, res) => {
 }
 
 export const postLoginUsuario = (req, res) => {
-    const q = "SELECT id, nome, email, senha, idDispensa FROM user WHERE email = ? AND senha = ?";
+    console.log("chegou aqui!");
+    const q = "SELECT id, nome, email, senha FROM user WHERE email = ? AND senha = ?";
     const values = [
         req.body.email,
         req.body.senha
@@ -43,11 +44,12 @@ export const postLoginUsuario = (req, res) => {
                     nome: data[0].nome,
                     email: data[0].email,
                     senha: data[0].senha,
-                    idDispensa: data[0].idDispensa
                 };
                 setUserInSession(req, user);
+                console.log(user);
                 return res.status(200).json(true);
             } else {
+                console.log("false")
                 return res.status(200).json(false);
             }
         }

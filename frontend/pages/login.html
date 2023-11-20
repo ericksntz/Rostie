@@ -75,7 +75,8 @@
                     } else {
                         document.querySelector("#email-tag").style.display = "block"; // Exibe a mensagem de erro de login
                     }
-                }).catch(error => {
+                })
+                .catch(error => {
                     console.error("Erro:", error); // Trata qualquer erro que ocorra na requisição
                     document.querySelector("#erro-interno").style.display = "block";
                 });

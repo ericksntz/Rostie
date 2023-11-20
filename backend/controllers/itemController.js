@@ -11,7 +11,7 @@ export const getItens = (req, res) => {
     })
 }
 
-export const putItens = (req, res) => {
+/* export const putItens = (req, res) => {
     const q = "UPDATE item SET `nome` = ?, `qntd` = ? WHERE `id` = ?";
 
     const values = [
@@ -24,86 +24,59 @@ export const putItens = (req, res) => {
 
         return res.status(200).json("Item alterado com sucesso!");
     })
-}
-
-function existPantrey(callback) {
-    const q = "SELECT idDispensa FROM user WHERE id = ?";
-
-    db.query(q, [getUserFromSession().id], (error, data) => {
-        if (error) return callback(error, null);
-        
-        if (data.length !== 0) {
-            callback(null, true);
-        } else {
-            callback(null, false);
-        }
-    });
-}
+} */
 
 export const postItens = (req, res) => {
-    existPantrey((error, exist) => {
-        if (error) return res.json(error);
-
-        if (exist) {
-            cadastraItem(req, res);
-        } else {
-            const q = "UPDATE user SET `idDispensa` = ? WHERE `id` = ?";
-            const id = getUserFromSession().id;
-            const values = [id, id];
-
-            db.query(q, values, (updateError) => {
-                if (updateError) return res.json(updateError);
-
-                cadastraItem(req, res);
-            });
-        }
-    });
-};
-
-function cadastraItem(req, res) {
-    const q = "INSERT INTO item(`nome`, `qntd`, `idCategoria`, `idDispensa`) VALUES(?)";
-
+    const q = "INSERT INTO item(`nome`, `qntd`, `idCategoria`) VALUES(?)";
     const values = [
         req.body.nome,
         req.body.qntd,
-        req.body.idCategoria,
-        getUserFromSession().idDispensa // Verifique se a propriedade correta está sendo acessada aqui
-    ];
+        req.body.idCategoria
+    ]
 
-    db.query(q, [values], (error) => {
-        if (error) return res.json(error);
+    db.query(q, [values], (error) =>{
+        if(error) return res.json(error);
 
-        return res.status(200).json("Item adicionado a sua despensa com sucesso!");
+        return res.status(200).json("Item cadastrado com sucesso!");
+    })
+};
+
+export const putItensMenos = (req, res) => {
+    const q = "UPDATE item SET qntd = ? WHERE id = ?;";
+    const values = [(parseInt(req.body.qntd, 10) - 1), req.body.id];
+
+    db.query(q, values, (error, results) => {
+        if (error) {
+            console.error('Erro ao decrementar item:', error);
+            return res.status(500).json({ error: 'Erro interno no servidor ao decrementar o item.' });
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: 'Item não encontrado ou não foi modificado.' });
+        }
+
+        return res.status(200).json("Item decrementado com sucesso!");
     });
 }
 
-export const putItensMenos = (req, res) => {
-    const q = "UPDATE item SET qntd = qntd + 1 WHERE id = ?;";
+export const putItensMais = (req, res) => {
+    const q = "UPDATE item SET qntd = ? WHERE id = ?;";
+    const values = [(parseInt(req.body.qntd, 10) + 1), req.body.id];
 
-    const values = [
-        req.body.idItem
-    ]
+    db.query(q, values, (error, results) => {
+        if (error) {
+            console.error('Erro ao decrementar item:', error);
+            return res.status(500).json({ error: 'Erro interno no servidor ao decrementar o item.' });
+        }
 
-    db.query(q, [...values, req.params.id], (error) =>{
-        if(error) return res.json(error);
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: 'Item não encontrado ou não foi modificado.' });
+        }
 
         return res.status(200).json("Item incrementado com sucesso!");
-    })
+    });
 }
 
-export const putItensMais = (req, res) => {
-    const q = "UPDATE item SET qntd = qntd - 1 WHERE id = ?;";
-
-    const values = [
-        req.body.idItem
-    ]
-
-    db.query(q, [...values, req.params.id], (error) =>{
-        if(error) return res.json(error);
-
-        return res.status(200).json("Item decrementado com sucesso!");
-    })
-}
 
 export const deleteItens = (req, res) => {
     const q = "DELETE FROM item WHERE `nome` = ?";
