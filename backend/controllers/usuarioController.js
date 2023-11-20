@@ -14,11 +14,10 @@ export const getUsuarios = (req, res) => {
 
 export const postUsuarios = (req, res) => {
     const q = "INSERT INTO user(`nome`, `email`, `senha`) VALUES(?)";
-
     const values = [
         req.body.nome,
         req.body.email,
-        req.body.senha
+        req.body.senha,
     ]
 
     db.query(q, [values], (error) =>{

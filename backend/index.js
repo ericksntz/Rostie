@@ -3,6 +3,7 @@ import cors from "cors";
 import session from "express-session";
 import rotasUsuario from "./rotasUsuario.js";
 import rotasItem from "./rotasItem.js";
+import rotasCategoria from "./rotasCategoria.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(session({
 
 app.use("/user", rotasUsuario);
 app.use("/item", rotasItem);
+app.use("/categoria", rotasCategoria);
 
 app.get("/teste", (req, res)=>{res.send(getUserFromSession(req))})
 
@@ -31,5 +33,5 @@ export const setUserInSession = (req, user) => {
   
 // Função para obter o usuário da sessão
 export const getUserFromSession = (req) => {
-    return req.session.user || null;
+    return req.session.user;
 };
