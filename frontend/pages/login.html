@@ -11,25 +11,25 @@
     <div class="conteiner">
         <div class="left-side">
             <a href="home.html"><img src="../images/logo.png" alt="Logo" class="logo"></a>
-            <img src="../images/female chef-amico.svg" alt="Foto Ilustrativa de Chefe Cozinhando" class="vetor">
+            <img src="/frontend/images/pastry chef-rafiki.svg" alt="Foto Ilustrativa de Chefe Cozinhando" class="vetor">
         </div>
         <div class="right-side">
             <div class="right-top">
             Não tem uma conta?<a href="sign-up.html" class="btn-login">Cadastre-se</a>
             </div>
-            <h1>Bem vindo de volta</h1>
-            <h3>Faça seu login:</h3>
+            <h1>Bem-vindo(a) de volta</h1>
+            <h3 class="subtitle">Faça seu login:</h3>
             <form method="POST">
                 <label for="email" class="form-label">E-mail:</label>
                 <input type="email" placeholder="Digite seu e-mail" id="email" name="email" class="form-control" required>
                 <div class="invalid-feedback">
-                    Email inválido!!
+                    Email inválido!
                 </div>
     
                 <label for="senha" class="form-label">Digite sua Senha:</label>
                 <input type="password" class="form-control" placeholder="Digite sua senha" id="senha" name="senha" required>
                 <div class="invalid-feedback">
-                    A senha é inválida!!
+                    A senha é inválida!
                 </div>
 
                 <a class="esqueci-senha" href="#">Esqueceu a senha?</a>
@@ -39,11 +39,14 @@
                 </div>
 
                 <div id="erro-interno" class="feedback-box">
-                    <p class="feedback-text">Error!! Verifique os dados!</p>
+                    <p class="feedback-text">Error! Verifique os dados!</p>
                 </div>
 
-                <button type="submit" value="cadastrar"> ENTRAR</button>
+                <button type="submit" value="cadastrar">ENTRAR</button>
             </form>
+            <div class="right-bottom">
+                Não tem uma conta?<a href="sign-up.html" class="btn-login">Cadastre-se</a>
+                </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -65,14 +68,103 @@
                     body: JSON.stringify(dados),
                     headers: {
                         "Content-Type": "application/json"
-                    },
-                    credentials: 'include'
+                    }
                 }).then(resposta => resposta.json())
                 .then(resultado => {
-                    console.log(resultado);
+                    console.log(resultado); // Verifique a resposta do servidor
                     
                     if(resultado) {
-                        window.location.href = "home.html";
+                        window.location.href = "home.html"; // Redireciona para a página home se o login for bem-sucedido
+                    } else {
+                        document.querySelector("#email-tag").style.display = "block"; // Exibe a mensagem de erro de login
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro:", error); // Trata qualquer erro que ocorra na requisição
+                    document.querySelector("#erro-interno").style.display = "block";
+                });
+            }
+            form.classList.add('was-validated');
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style/login.css">
+    <title>Rostie - Login</title>
+</head>
+<body>
+    <div class="conteiner">
+        <div class="left-side">
+            <a href="home.html"><img src="../images/logo.png" alt="Logo" class="logo"></a>
+            <img src="/frontend/images/pastry chef-rafiki.svg" alt="Foto Ilustrativa de Chefe Cozinhando" class="vetor">
+        </div>
+        <div class="right-side">
+            <div class="right-top">
+            Não tem uma conta?<a href="sign-up.html" class="btn-login">Cadastre-se</a>
+            </div>
+            <h1>Bem-vindo(a) de volta</h1>
+            <h3 class="subtitle">Faça seu login:</h3>
+            <form method="POST">
+                <label for="email" class="form-label">E-mail:</label>
+                <input type="email" placeholder="Digite seu e-mail" id="email" name="email" class="form-control" required>
+                <div class="invalid-feedback">
+                    Email inválido!
+                </div>
+    
+                <label for="senha" class="form-label">Digite sua Senha:</label>
+                <input type="password" class="form-control" placeholder="Digite sua senha" id="senha" name="senha" required>
+                <div class="invalid-feedback">
+                    A senha é inválida!
+                </div>
+
+                <a class="esqueci-senha" href="#">Esqueceu a senha?</a>
+    
+                <div id="email-tag" class="feedback-box">
+                    <p class="feedback-text">Dados Inválidos - Não há uma conta cadastrada com estes dados</p>
+                </div>
+
+                <div id="erro-interno" class="feedback-box">
+                    <p class="feedback-text">Error! Verifique os dados!</p>
+                </div>
+
+                <button type="submit" value="cadastrar">ENTRAR</button>
+            </form>
+            <div class="right-bottom">
+                Não tem uma conta?<a href="sign-up.html" class="btn-login">Cadastre-se</a>
+                </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        var form = document.querySelector('form');
+
+        form.addEventListener('submit', (event) => {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            } else {
+                let dados = {
+                    email: document.querySelector("#email").value,
+                    senha: document.querySelector("#senha").value
+                };
+                
+                fetch("http://localhost:5752/user/login", {
+                    method: "POST",
+                    body: JSON.stringify(dados),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(resposta => resposta.json())
+                .then(resultado => {
+                    console.log(resultado); // Verifique a resposta do servidor
+                    
+                    if(resultado) {
+                        window.location.href = "home.html"; // Redireciona para a página home se o login for bem-sucedido
                     } else {
                         document.querySelector("#email-tag").style.display = "block"; // Exibe a mensagem de erro de login
                     }
