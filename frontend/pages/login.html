@@ -65,13 +65,14 @@
                     body: JSON.stringify(dados),
                     headers: {
                         "Content-Type": "application/json"
-                    }
+                    },
+                    credentials: 'include'
                 }).then(resposta => resposta.json())
                 .then(resultado => {
-                    console.log(resultado); // Verifique a resposta do servidor
+                    console.log(resultado);
                     
                     if(resultado) {
-                        window.location.href = "home.html"; // Redireciona para a página home se o login for bem-sucedido
+                        window.location.href = "home.html";
                     } else {
                         document.querySelector("#email-tag").style.display = "block"; // Exibe a mensagem de erro de login
                     }

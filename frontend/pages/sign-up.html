@@ -133,7 +133,8 @@
                     body: JSON.stringify(dados),
                     headers:{
                         "Content-Type": "application/json"
-                    }
+                    },
+                    credentials: 'include'
                 })
                 .then(resposta => resposta.json())
                 .then(resultado => {

@@ -1,15 +1,41 @@
 import { db } from "../db.js";
-import { getUserFromSession } from "../index.js";
 
 export const getItens = (req, res) => {
-    const q = "SELECT * FROM item";
+    const q = "SELECT * FROM item WHERE id_user = ?;";
 
-    db.query(q, (error, data) =>{
+    db.query(q, req.params.id ,(error, data) =>{
         if(error) return res.json(error);
 
         return res.status(200).json(data);
     })
 }
+
+export const checaItens = (id, lista_precisa) => {
+    return new Promise((resolve, reject) => {
+        const q = "SELECT nome FROM item WHERE id_user = ?;";
+
+        db.query(q, id, (error, data) => {
+            if (error) {
+                // Lidar com o erro, se houver
+                console.error(error);
+                reject(error);
+            }
+
+            const lista_tem = data.map(item => item.nome); // Preenche lista_tem com os nomes retornados pela consulta
+
+            // Verifica se lista_tem contém todos os elementos de lista_precisa
+            const todosItensPresentes = lista_precisa.every(item => lista_tem.includes(item));
+
+            if (todosItensPresentes) {
+                resolve(true);
+            } else {
+                resolve(false);
+            }
+        });
+    });
+};
+
+
 
 /* export const putItens = (req, res) => {
     const q = "UPDATE item SET `nome` = ?, `qntd` = ? WHERE `id` = ?";
@@ -27,11 +53,12 @@ export const getItens = (req, res) => {
 } */
 
 export const postItens = (req, res) => {
-    const q = "INSERT INTO item(`nome`, `qntd`, `idCategoria`) VALUES(?)";
+    const q = "INSERT INTO item(`nome`, `qntd`, `idCategoria`, `id_user`) VALUES(?)";
     const values = [
         req.body.nome,
         req.body.qntd,
-        req.body.idCategoria
+        req.body.idCategoria,
+        req.params.id
     ]
 
     db.query(q, [values], (error) =>{

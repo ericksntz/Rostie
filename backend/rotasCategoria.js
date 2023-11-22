@@ -9,6 +9,6 @@ roteador.post("/", postCategoria)
 
 roteador.put("/:id", putCategoria)
 
-roteador.delete("/:nome", deleteCategoria)
+roteador.delete("/:id", deleteCategoria)
 
 export default roteador;

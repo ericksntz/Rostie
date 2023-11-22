@@ -86,7 +86,7 @@
       </div>
       </form>
       <script> 
-        alert("Interaja com a página somente se estiver logado!!");
+        alert("Necessita id na URL!");
         
         function validarNumero(input) {
             if (input.value < 1) {
@@ -98,7 +98,8 @@
 
 
         fetch("http://localhost:5752/categoria", {
-            method: "GET"
+            method: "GET",
+            credentials: 'include'
         })
         .then(resposta => resposta.json())
         .then(data => {
@@ -129,6 +130,7 @@
                         headers: {
                             "Content-Type": "application/json"
                         },
+                        credentials: 'include',
                         body: JSON.stringify(dados)
                     })
                     .then(resp => resp.json())
@@ -146,6 +148,7 @@
                         headers: {
                             "Content-Type": "application/json"
                         },
+                        credentials: 'include',
                         body: JSON.stringify(dados)
                     })
                     .then(resp => resp.json())
@@ -155,13 +158,19 @@
             });
         }
 
-        fetch("http://localhost:5752/item", {
-            method: "GET"
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const id = urlParams.get('id');
+
+        const URL_1 = "http://localhost:5752/item/" + id; 
+        fetch(URL_1, {
+            method: "GET",
+            credentials: 'include'
         })
         .then(resposta => resposta.json())
         .then(data => {
             adicionarGridItem(data);
-            adicionarEventosBotoes(); // Adiciona os Event Listeners após a criação dos botões
+            adicionarEventosBotoes();
         })
         .catch(error => console.error('Erro na requisição:', error));
 
@@ -212,6 +221,7 @@
             });
         }
 
+        const URL_2 = "http://localhost:5752/item/" + id
         document.addEventListener("DOMContentLoaded", function() {
             const form = document.querySelector("form");
             form.addEventListener("submit", function(e) {
@@ -225,17 +235,19 @@
 
                 console.log(document.querySelector("#categorias").value);
                 
-                fetch("http://localhost:5752/item", {
+                fetch(URL_2, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
+                    credentials: 'include',
                     body: JSON.stringify(dados)
                 })
                 .then(resp => resp.json())
                 .then(resultado => {
                     form.reset();
                     alert(resultado);
+                    location.reload(true);
                 })
 
             });

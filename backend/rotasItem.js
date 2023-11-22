@@ -3,9 +3,9 @@ import { getItens, postItens, putItensMais, putItensMenos, deleteItens } from ".
 
 const roteador = express.Router();
 
-roteador.get("/", getItens)
+roteador.get("/:id", getItens)
 
-roteador.post("/", postItens)
+roteador.post("/:id", postItens)
 
 //roteador.put("/:id", putItens)
 
@@ -13,6 +13,6 @@ roteador.put("/decremento", putItensMenos)
 
 roteador.put("/incremento", putItensMais)
 
-roteador.delete("/:nome", deleteItens)
+roteador.delete("/:id", deleteItens)
 
 export default roteador;

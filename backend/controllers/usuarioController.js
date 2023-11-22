@@ -1,6 +1,4 @@
 import { db } from "../db.js";
-import { User } from "../Entidades.js";
-import { setUserInSession } from "../index.js";
 
 export const getUsuarios = (req, res) => {
     const q = "SELECT * FROM user";
@@ -34,10 +32,14 @@ export const postLoginUsuario = (req, res) => {
         req.body.email,
         req.body.senha
     ];
+    console.log("indo entrar lo try");
     db.query(q, values, (error, data) => {
+        console.log("Dentro da consulta");
         if(error) {
+            console.log("Deu erro");
             return res.json(error);
         } else {
+            console.log("não deu erro");
             if(data.length !== 0) {
                 const user = {
                     id: data[0].id, 
@@ -45,8 +47,7 @@ export const postLoginUsuario = (req, res) => {
                     email: data[0].email,
                     senha: data[0].senha,
                 };
-                setUserInSession(req, user);
-                console.log(user);
+                req.session.user = user;
                 return res.status(200).json(true);
             } else {
                 console.log("false")
